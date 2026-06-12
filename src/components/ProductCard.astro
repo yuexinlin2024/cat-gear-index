@@ -1,0 +1,29 @@
+---
+import type { Product } from "@/data/products";
+import { getCategory } from "@/data/categories";
+
+type Props = {
+  product: Product;
+};
+
+const { product } = Astro.props;
+const category = getCategory(product.category);
+---
+
+<article class="product-card">
+  <a href={`/products/${product.slug}/`} class="product-image-link" aria-label={`Open ${product.name}`}>
+    <img src={product.image} alt={product.imageAlt} loading="lazy" />
+  </a>
+  <div class="product-card-body">
+    <div class="eyebrow-row">
+      <span>{category?.shortName}</span>
+      <span>{product.priceRange}</span>
+    </div>
+    <h3><a href={`/products/${product.slug}/`}>{product.name}</a></h3>
+    <p>{product.summary}</p>
+    <div class="tag-row" aria-label="Best for">
+      {product.bestFor.slice(0, 3).map((tag) => <span>{tag}</span>)}
+    </div>
+    {product.status === "sample" && <p class="sample-note">Sample record. Replace with verified product data before public monetization.</p>}
+  </div>
+</article>

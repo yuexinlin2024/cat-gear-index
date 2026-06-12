@@ -1,0 +1,18 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ProductCard from "@/components/ProductCard.astro";
+import { products } from "@/data/products";
+---
+
+<BaseLayout title="Product Database" description="Browse cat supply product records by category, fit notes, maintenance cost, and source verification status.">
+  <section class="page-hero">
+    <span class="eyebrow">Products</span>
+    <h1>Cat product records built for comparison.</h1>
+    <p>These launch records show the database structure. Replace sample rows with verified products before monetized publication.</p>
+  </section>
+  <section class="section">
+    <div class="product-grid">
+      {products.map((product) => <ProductCard product={product} />)}
+    </div>
+  </section>
+</BaseLayout>

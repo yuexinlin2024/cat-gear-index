@@ -1,0 +1,653 @@
+:root {
+  color-scheme: light;
+  --ink: #15211f;
+  --muted: #5f6e6a;
+  --soft: #eef3ee;
+  --line: #d9e2dc;
+  --paper: #fbfaf6;
+  --panel: #ffffff;
+  --brand: #18332f;
+  --brand-2: #2f6f63;
+  --accent: #f4c95d;
+  --accent-2: #d86f45;
+  --shadow: 0 16px 40px rgba(24, 51, 47, 0.1);
+  --radius: 8px;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+h1 {
+  font-size: clamp(2.2rem, 5vw, 4.8rem);
+  max-width: 980px;
+}
+
+h2 {
+  font-size: clamp(1.7rem, 3vw, 2.6rem);
+}
+
+h3 {
+  font-size: 1.18rem;
+}
+
+p {
+  color: var(--muted);
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 16px clamp(18px, 4vw, 56px);
+  border-bottom: 1px solid rgba(217, 226, 220, 0.86);
+  background: rgba(251, 250, 246, 0.94);
+  backdrop-filter: blur(16px);
+}
+
+.brand,
+.top-nav,
+.site-footer nav,
+.hero-actions,
+.eyebrow-row,
+.tag-row {
+  display: flex;
+  align-items: center;
+}
+
+.brand {
+  gap: 10px;
+  font-weight: 800;
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius);
+  background: var(--brand);
+  color: var(--accent);
+  font-size: 0.82rem;
+}
+
+.brand-text {
+  white-space: nowrap;
+}
+
+.top-nav {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.top-nav a,
+.site-footer a {
+  border-radius: 7px;
+  padding: 8px 10px;
+  color: var(--muted);
+  font-size: 0.94rem;
+  font-weight: 650;
+}
+
+.top-nav a:hover,
+.site-footer a:hover {
+  background: var(--soft);
+  color: var(--ink);
+}
+
+.hero-section,
+.page-hero,
+.section,
+.product-detail-hero,
+.article-shell,
+.calculator-shell,
+.site-footer {
+  width: min(1180px, calc(100% - 36px));
+  margin-inline: auto;
+}
+
+.hero-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 48px;
+  align-items: end;
+  padding: clamp(64px, 10vw, 112px) 0 48px;
+}
+
+.hero-copy p,
+.page-hero p,
+.section-heading p,
+.lead {
+  max-width: 760px;
+  font-size: 1.08rem;
+}
+
+.eyebrow {
+  display: inline-flex;
+  margin-bottom: 14px;
+  color: var(--brand-2);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-actions {
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 10px 16px;
+  font-weight: 800;
+}
+
+.button.primary {
+  border-color: var(--brand);
+  background: var(--brand);
+  color: white;
+}
+
+.button.secondary {
+  background: var(--panel);
+}
+
+.hero-panel,
+.operation-panel,
+.filter-panel,
+.notice,
+.detail-block,
+.calculator-result,
+.tool-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.hero-panel {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+}
+
+.hero-panel div {
+  border-radius: 7px;
+  background: var(--soft);
+  padding: 18px;
+}
+
+.hero-panel strong {
+  display: block;
+  font-size: 2.4rem;
+  line-height: 1;
+}
+
+.hero-panel span {
+  color: var(--muted);
+  font-weight: 650;
+}
+
+.page-hero {
+  padding: 62px 0 26px;
+}
+
+.section {
+  padding: 34px 0;
+}
+
+.section-heading {
+  margin-bottom: 22px;
+  text-align: center;
+}
+
+.section-heading.align-left {
+  text-align: left;
+}
+
+.category-grid,
+.product-grid,
+.guide-grid,
+.tool-grid,
+.product-detail-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.category-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.category-card,
+.guide-card,
+.product-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  overflow: hidden;
+}
+
+.category-card {
+  display: grid;
+  gap: 12px;
+  min-height: 230px;
+  padding: 18px;
+}
+
+.category-card:hover,
+.guide-card:hover,
+.product-card:hover,
+.tool-card:hover {
+  border-color: #b7cbc2;
+  transform: translateY(-1px);
+}
+
+.card-icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius);
+  background: var(--soft);
+  color: var(--brand-2);
+}
+
+.category-card strong,
+.category-card small {
+  display: block;
+}
+
+.category-card small,
+.guide-card span,
+.eyebrow-row,
+.sample-note,
+.muted {
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.product-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.product-grid.compact {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  background: var(--soft);
+}
+
+.product-card-body,
+.guide-card {
+  padding: 18px;
+}
+
+.eyebrow-row {
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-weight: 800;
+}
+
+.product-card h3 a,
+.guide-card h3 a,
+.comparison-table a {
+  color: var(--brand);
+}
+
+.tag-row {
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag-row span {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--soft);
+  padding: 5px 8px;
+  color: var(--brand);
+  font-size: 0.76rem;
+  font-weight: 750;
+}
+
+.tag-row.large span {
+  font-size: 0.9rem;
+}
+
+.sample-note {
+  margin: 14px 0 0;
+  font-weight: 700;
+}
+
+.two-column,
+.split-section,
+.product-detail-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 24px;
+  align-items: start;
+}
+
+.operation-panel,
+.filter-panel,
+.detail-block,
+.calculator-result {
+  padding: 20px;
+}
+
+.operation-panel ol,
+.detail-block ul,
+.article-shell ul {
+  padding-left: 22px;
+  color: var(--muted);
+}
+
+.split-section {
+  grid-template-columns: 300px minmax(0, 1fr);
+}
+
+.guide-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.tool-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.tool-card {
+  display: block;
+  padding: 22px;
+}
+
+.tool-card span {
+  color: var(--accent-2);
+  font-weight: 900;
+}
+
+.tool-card.disabled {
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+.calculator-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 24px;
+  margin-top: 18px;
+  margin-bottom: 48px;
+}
+
+.calculator-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  padding: 20px;
+}
+
+label {
+  display: grid;
+  gap: 7px;
+  color: var(--muted);
+  font-weight: 750;
+}
+
+input {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  color: var(--ink);
+  font: inherit;
+}
+
+.calculator-result strong {
+  display: block;
+  margin: 8px 0;
+  color: var(--brand);
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.product-detail-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 420px;
+  gap: 36px;
+  align-items: center;
+  padding: 54px 0 28px;
+}
+
+.product-detail-hero img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius);
+  object-fit: cover;
+}
+
+.notice {
+  margin: 18px 0;
+  padding: 14px;
+  color: #6a4a12;
+  background: #fff7dc;
+  box-shadow: none;
+}
+
+.product-detail-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.spec-table {
+  display: grid;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--panel);
+}
+
+.spec-table div {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 16px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.spec-table div:last-child {
+  border-bottom: 0;
+}
+
+.spec-table span {
+  color: var(--muted);
+  font-weight: 750;
+}
+
+.article-shell {
+  max-width: 840px;
+  padding: 62px 0;
+}
+
+.article-shell h1 {
+  font-size: clamp(2rem, 4vw, 3.6rem);
+}
+
+.article-shell h2 {
+  margin-top: 36px;
+  font-size: 1.55rem;
+}
+
+.comparison-wrap {
+  overflow-x: auto;
+}
+
+.comparison-table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+
+.comparison-table th,
+.comparison-table td {
+  width: 20%;
+  border: 1px solid var(--line);
+  padding: 14px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.comparison-table th:first-child,
+.comparison-table td:first-child {
+  width: 160px;
+  color: var(--muted);
+  font-weight: 850;
+}
+
+.site-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 32px;
+  margin-top: 48px;
+  padding: 34px 0 44px;
+  border-top: 1px solid var(--line);
+}
+
+.site-footer p {
+  max-width: 620px;
+  margin-bottom: 0;
+}
+
+.site-footer nav {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+@media (max-width: 980px) {
+  .hero-section,
+  .two-column,
+  .split-section,
+  .calculator-shell,
+  .product-detail-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .category-grid,
+  .product-grid,
+  .product-grid.compact,
+  .guide-grid,
+  .tool-grid,
+  .product-detail-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .filter-panel {
+    position: static;
+  }
+}
+
+@media (max-width: 720px) {
+  .site-header {
+    position: static;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .top-nav {
+    justify-content: flex-start;
+  }
+
+  .hero-section {
+    padding-top: 42px;
+  }
+
+  .category-grid,
+  .product-grid,
+  .product-grid.compact,
+  .guide-grid,
+  .tool-grid,
+  .product-detail-grid,
+  .calculator-form {
+    grid-template-columns: 1fr;
+  }
+
+  .spec-table div {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .site-footer {
+    flex-direction: column;
+  }
+
+  .site-footer nav {
+    justify-content: flex-start;
+  }
+
+  .calculator-result strong {
+    font-size: 2.4rem;
+  }
+}

@@ -1,0 +1,33 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const guides = await getCollection("guides", ({ data }) => !data.draft);
+
+  return guides.map((guide) => ({
+    params: { slug: guide.slug },
+    props: { guide }
+  }));
+}
+
+const { guide } = Astro.props;
+const { Content } = await render(guide);
+const { title, description, category, readingTime, points, updatedAt } = guide.data;
+---
+
+<BaseLayout title={title} description={description} pathname={`/guides/${guide.slug}/`}>
+  <article class="article-shell">
+    <span class="eyebrow">{category} · {readingTime}</span>
+    <h1>{title}</h1>
+    <p class="lead">{description}</p>
+
+    <section>
+      <h2>Quick Take</h2>
+      <ul>{points.map((point) => <li>{point}</li>)}</ul>
+    </section>
+
+    <Content />
+    <p class="muted">Last updated: {updatedAt}</p>
+  </article>
+</BaseLayout>

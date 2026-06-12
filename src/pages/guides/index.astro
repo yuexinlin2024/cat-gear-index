@@ -1,0 +1,22 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import GuideCard from "@/components/GuideCard.astro";
+import { getCollection } from "astro:content";
+
+const guides = (await getCollection("guides", ({ data }) => !data.draft)).sort(
+  (a, b) => Date.parse(b.data.updatedAt) - Date.parse(a.data.updatedAt)
+);
+---
+
+<BaseLayout title="Cat Gear Guides" description="Read buying guides, maintenance workflows, and checklists for cat supplies.">
+  <section class="page-hero">
+    <span class="eyebrow">Guides</span>
+    <h1>Guides that support database decisions.</h1>
+    <p>Guide pages target long-tail search questions and link back into product records, tools, and comparison pages.</p>
+  </section>
+  <section class="section">
+    <div class="guide-grid">
+      {guides.map((guide) => <GuideCard guide={guide} />)}
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,67 @@
+---
+import { site, canonical } from "@/utils/seo";
+import "@/styles/global.css";
+
+type Props = {
+  title?: string;
+  description?: string;
+  pathname?: string;
+};
+
+const {
+  title = site.name,
+  description = site.description,
+  pathname = Astro.url.pathname
+} = Astro.props;
+
+const pageTitle = title === site.name ? title : `${title} | ${site.name}`;
+const canonicalUrl = canonical(pathname);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="Cat Gear Index home">
+        <span class="brand-mark">CG</span>
+        <span class="brand-text">Cat Gear Index</span>
+      </a>
+      <nav class="top-nav" aria-label="Main navigation">
+        <a href="/categories/">Categories</a>
+        <a href="/products/">Products</a>
+        <a href="/compare/">Compare</a>
+        <a href="/tools/">Tools</a>
+        <a href="/guides/">Guides</a>
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div>
+        <strong>Cat Gear Index</strong>
+        <p>Structured cat supplies research. We compare product specs, owner-use signals, maintenance cost, and fit notes. This site does not provide veterinary advice.</p>
+      </div>
+      <nav aria-label="Footer navigation">
+        <a href="/about/">About</a>
+        <a href="/editorial-policy/">Editorial Policy</a>
+        <a href="/affiliate-disclosure/">Affiliate Disclosure</a>
+        <a href="/privacy-policy/">Privacy</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+    </footer>
+  </body>
+</html>

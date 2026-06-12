@@ -1,0 +1,51 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { products } from "@/data/products";
+import { getCategory } from "@/data/categories";
+
+const comparisonProducts = products.slice(0, 4);
+const specKeys = Array.from(new Set(comparisonProducts.flatMap((product) => Object.keys(product.specs))));
+---
+
+<BaseLayout title="Compare Cat Gear" description="Compare sample cat gear records by category, price range, best-fit notes, maintenance, and specs.">
+  <section class="page-hero">
+    <span class="eyebrow">Compare</span>
+    <h1>Side-by-side cat gear comparison.</h1>
+    <p>The MVP comparison table demonstrates the structure. The next step is adding selectable products and verified data.</p>
+  </section>
+
+  <section class="section comparison-wrap">
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Field</th>
+          {comparisonProducts.map((product) => <th><a href={`/products/${product.slug}/`}>{product.name}</a></th>)}
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Category</td>
+          {comparisonProducts.map((product) => <td>{getCategory(product.category)?.shortName}</td>)}
+        </tr>
+        <tr>
+          <td>Price</td>
+          {comparisonProducts.map((product) => <td>{product.priceRange}</td>)}
+        </tr>
+        <tr>
+          <td>Best for</td>
+          {comparisonProducts.map((product) => <td>{product.bestFor.join(", ")}</td>)}
+        </tr>
+        <tr>
+          <td>Maintenance</td>
+          {comparisonProducts.map((product) => <td>{product.maintenance}</td>)}
+        </tr>
+        {specKeys.map((key) => (
+          <tr>
+            <td>{key}</td>
+            {comparisonProducts.map((product) => <td>{product.specs[key] ?? "Not applicable"}</td>)}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </section>
+</BaseLayout>

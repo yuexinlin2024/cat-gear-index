@@ -1,0 +1,20 @@
+---
+import type { Category } from "@/data/categories";
+
+type Props = {
+  category: Category;
+  count: number;
+};
+
+const { category, count } = Astro.props;
+const Icon = category.icon;
+---
+
+<a class="category-card" href={`/categories/${category.slug}/`}>
+  <span class="card-icon"><Icon size={22} stroke-width={1.8} /></span>
+  <span>
+    <strong>{category.name}</strong>
+    <small>{count} records</small>
+  </span>
+  <p>{category.description}</p>
+</a>

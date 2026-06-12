@@ -1,0 +1,41 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ProductCard from "@/components/ProductCard.astro";
+import { categories, getCategory } from "@/data/categories";
+import { getProductsByCategory } from "@/data/products";
+
+export function getStaticPaths() {
+  return categories.map((category) => ({
+    params: { slug: category.slug }
+  }));
+}
+
+const { slug } = Astro.params;
+const category = getCategory(slug!);
+const categoryProducts = getProductsByCategory(slug!);
+
+if (!category) {
+  return Astro.redirect("/categories/");
+}
+---
+
+<BaseLayout title={category.name} description={category.description} pathname={`/categories/${category.slug}/`}>
+  <section class="page-hero">
+    <span class="eyebrow">Category database</span>
+    <h1>{category.name}</h1>
+    <p>{category.description}</p>
+  </section>
+
+  <section class="section split-section">
+    <div class="filter-panel">
+      <h2>Comparison Fields</h2>
+      <p>{category.buyerIntent}</p>
+      <div class="tag-row large">
+        {category.filters.map((filter) => <span>{filter}</span>)}
+      </div>
+    </div>
+    <div class="product-grid">
+      {categoryProducts.map((product) => <ProductCard product={product} />)}
+    </div>
+  </section>
+</BaseLayout>

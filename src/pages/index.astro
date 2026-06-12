@@ -1,0 +1,87 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import CategoryCard from "@/components/CategoryCard.astro";
+import GuideCard from "@/components/GuideCard.astro";
+import ProductCard from "@/components/ProductCard.astro";
+import { getCollection } from "astro:content";
+import { categories } from "@/data/categories";
+import { products } from "@/data/products";
+
+const featuredProducts = products.slice(0, 4);
+const guides = (await getCollection("guides", ({ data }) => !data.draft))
+  .sort((a, b) => Date.parse(b.data.updatedAt) - Date.parse(a.data.updatedAt))
+  .slice(0, 4);
+---
+
+<BaseLayout title="Cat Supplies Database" description="Compare cat litter, boxes, fountains, feeders, carriers, trees, scratchers, and recurring maintenance costs in one structured database.">
+  <section class="hero-section">
+    <div class="hero-copy">
+      <span class="eyebrow">Structured cat supplies research</span>
+      <h1>Choose cat gear by fit, maintenance, and real household tradeoffs.</h1>
+      <p>Cat Gear Index is built as a database first: product specs, category filters, maintenance cost, fit notes, and buyer guides for cat owners who want fewer vague recommendations.</p>
+      <div class="hero-actions">
+        <a class="button primary" href="/categories/">Browse Categories</a>
+        <a class="button secondary" href="/tools/litter-cost-calculator/">Estimate Litter Cost</a>
+      </div>
+    </div>
+    <div class="hero-panel" aria-label="Database highlights">
+      <div>
+        <strong>8</strong>
+        <span>launch categories</span>
+      </div>
+      <div>
+        <strong>3</strong>
+        <span>tool workflows planned</span>
+      </div>
+      <div>
+        <strong>0</strong>
+        <span>veterinary claims</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-heading">
+      <span class="eyebrow">Database</span>
+      <h2>Start with a category</h2>
+      <p>Each category is designed around comparison fields that matter before purchase and after the box arrives.</p>
+    </div>
+    <div class="category-grid">
+      {categories.map((category) => (
+        <CategoryCard category={category} count={products.filter((product) => product.category === category.slug).length} />
+      ))}
+    </div>
+  </section>
+
+  <section class="section two-column">
+    <div>
+      <div class="section-heading align-left">
+        <span class="eyebrow">Featured records</span>
+        <h2>Product pages are structured for verification</h2>
+        <p>Launch records are intentionally marked as samples. Replace them with real products, source notes, and affiliate URLs before public monetization.</p>
+      </div>
+      <div class="product-grid compact">
+        {featuredProducts.map((product) => <ProductCard product={product} />)}
+      </div>
+    </div>
+    <aside class="operation-panel">
+      <h2>First revenue path</h2>
+      <ol>
+        <li>Publish verified category data and buyer guides.</li>
+        <li>Add Amazon, Chewy, Walmart, or Petco affiliate links with clear disclosure.</li>
+        <li>Apply for AdSense after the site has real content, policy pages, and natural search visibility.</li>
+        <li>Use Search Console data to expand high-impression categories.</li>
+      </ol>
+    </aside>
+  </section>
+
+  <section class="section">
+    <div class="section-heading">
+      <span class="eyebrow">Guides</span>
+      <h2>Content pillars for search traffic</h2>
+    </div>
+    <div class="guide-grid">
+      {guides.map((guide) => <GuideCard guide={guide} />)}
+    </div>
+  </section>
+</BaseLayout>

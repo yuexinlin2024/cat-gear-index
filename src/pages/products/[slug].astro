@@ -1,0 +1,86 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { products, getProduct } from "@/data/products";
+import { getCategory } from "@/data/categories";
+
+export function getStaticPaths() {
+  return products.map((product) => ({
+    params: { slug: product.slug }
+  }));
+}
+
+const { slug } = Astro.params;
+const product = getProduct(slug!);
+
+if (!product) {
+  return Astro.redirect("/products/");
+}
+
+const category = getCategory(product.category);
+---
+
+<BaseLayout title={product.name} description={product.summary} pathname={`/products/${product.slug}/`}>
+  <section class="product-detail-hero">
+    <div>
+      <span class="eyebrow">{category?.name} · {product.priceRange}</span>
+      <h1>{product.name}</h1>
+      <p>{product.summary}</p>
+      {product.status === "sample" && (
+        <div class="notice">
+          This is a sample database record. Replace it with verified product data, original notes, and approved affiliate links before using it as a public recommendation.
+        </div>
+      )}
+      <div class="hero-actions">
+        <a class="button primary" href="/compare/">Compare Records</a>
+        <a class="button secondary" href={`/categories/${product.category}/`}>Back to {category?.shortName}</a>
+      </div>
+    </div>
+    <img src={product.image} alt={product.imageAlt} />
+  </section>
+
+  <section class="section product-detail-grid">
+    <div class="detail-block">
+      <h2>Best For</h2>
+      <ul>{product.bestFor.map((item) => <li>{item}</li>)}</ul>
+    </div>
+    <div class="detail-block">
+      <h2>Not For</h2>
+      <ul>{product.notFor.map((item) => <li>{item}</li>)}</ul>
+    </div>
+    <div class="detail-block">
+      <h2>Pros</h2>
+      <ul>{product.pros.map((item) => <li>{item}</li>)}</ul>
+    </div>
+    <div class="detail-block">
+      <h2>Cons</h2>
+      <ul>{product.cons.map((item) => <li>{item}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-heading align-left">
+      <span class="eyebrow">Specs</span>
+      <h2>Comparison data</h2>
+    </div>
+    <div class="spec-table">
+      {Object.entries(product.specs).map(([key, value]) => (
+        <div>
+          <span>{key}</span>
+          <strong>{value}</strong>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section two-column">
+    <div class="detail-block wide">
+      <h2>Maintenance Notes</h2>
+      <p>{product.maintenance}</p>
+    </div>
+    <div class="detail-block wide">
+      <h2>Source Note</h2>
+      <p>{product.sourceNote}</p>
+      <p class="muted">Last updated: {product.updatedAt}</p>
+    </div>
+  </section>
+</BaseLayout>

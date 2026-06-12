@@ -1,0 +1,65 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Cat Litter Cost Calculator" description="Estimate monthly and yearly cat litter cost from cat count, bag price, bag weight, and usage per cat.">
+  <section class="page-hero">
+    <span class="eyebrow">Calculator</span>
+    <h1>Cat litter monthly cost calculator.</h1>
+    <p>Compare litter by real recurring cost instead of bag price alone. Adjust usage for litter type, cat count, and full box replacements.</p>
+  </section>
+
+  <section class="calculator-shell" data-litter-calculator>
+    <form class="calculator-form">
+      <label>
+        Number of cats
+        <input name="cats" type="number" min="1" value="1" inputmode="numeric" />
+      </label>
+      <label>
+        Bag price
+        <input name="price" type="number" min="0" step="0.01" value="24.99" inputmode="decimal" />
+      </label>
+      <label>
+        Bag weight in pounds
+        <input name="weight" type="number" min="1" step="0.1" value="20" inputmode="decimal" />
+      </label>
+      <label>
+        Pounds used per cat per week
+        <input name="weekly" type="number" min="0.1" step="0.1" value="4" inputmode="decimal" />
+      </label>
+    </form>
+    <div class="calculator-result" aria-live="polite">
+      <span>Estimated monthly cost</span>
+      <strong data-monthly>$0.00</strong>
+      <p data-yearly>Estimated yearly cost: $0.00</p>
+      <small>Use this as a planning estimate. Actual use depends on litter type, box count, cleaning schedule, and household conditions.</small>
+    </div>
+  </section>
+
+  <script>
+    const shell = document.querySelector("[data-litter-calculator]");
+    const form = shell?.querySelector("form");
+    const monthly = shell?.querySelector("[data-monthly]");
+    const yearly = shell?.querySelector("[data-yearly]");
+
+    function money(value) {
+      return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(value);
+    }
+
+    function calculate() {
+      if (!form || !monthly || !yearly) return;
+      const data = new FormData(form);
+      const cats = Number(data.get("cats")) || 1;
+      const price = Number(data.get("price")) || 0;
+      const weight = Number(data.get("weight")) || 1;
+      const weekly = Number(data.get("weekly")) || 0;
+      const costPerPound = price / weight;
+      const monthlyCost = cats * weekly * 4.345 * costPerPound;
+      monthly.textContent = money(monthlyCost);
+      yearly.textContent = `Estimated yearly cost: ${money(monthlyCost * 12)}`;
+    }
+
+    form?.addEventListener("input", calculate);
+    calculate();
+  </script>
+</BaseLayout>
