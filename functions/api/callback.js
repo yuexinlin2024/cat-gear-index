@@ -1,11 +1,6 @@
 const tokenUrl = "https://github.com/login/oauth/access_token";
 
 function html(payload) {
-  const message = JSON.stringify({
-    provider: "github",
-    ...payload
-  });
-
   return `<!doctype html>
 <html lang="en">
   <head>
@@ -14,11 +9,23 @@ function html(payload) {
   </head>
   <body>
     <script>
-      const message = ${message};
-      if (window.opener) {
-        window.opener.postMessage("authorization:github:success:" + JSON.stringify(message), window.location.origin);
-      }
-      window.close();
+      (function () {
+        function receiveMessage(event) {
+          if (event.origin !== window.location.origin) return;
+          window.opener.postMessage(
+            'authorization:github:success:' + JSON.stringify(${JSON.stringify(payload)}),
+            event.origin
+          );
+          window.removeEventListener('message', receiveMessage, false);
+          window.close();
+        }
+
+        window.addEventListener('message', receiveMessage, false);
+
+        if (window.opener) {
+          window.opener.postMessage('authorizing:github', window.location.origin);
+        }
+      })();
     </script>
     <p>Authentication complete. You can close this window.</p>
   </body>
