@@ -1,0 +1,72 @@
+backend:
+  name: github
+  repo: yuexinlin2024/cat-gear-index
+  branch: main
+  base_url: https://catgearindex.com
+  auth_endpoint: /api/auth
+
+publish_mode: editorial_workflow
+media_folder: public/uploads
+public_folder: /uploads
+
+site_url: https://catgearindex.com
+display_url: https://catgearindex.com
+logo_url: /favicon.svg
+
+collections:
+  - name: guides
+    label: Guides
+    label_singular: Guide
+    folder: src/content/guides
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    editor:
+      preview: false
+    sortable_fields:
+      - title
+      - category
+      - updatedAt
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Description
+        name: description
+        widget: text
+      - label: Category
+        name: category
+        widget: select
+        options:
+          - Starter Guides
+          - Buying Guides
+          - Cost Guides
+          - Maintenance
+          - Comparisons
+          - Troubleshooting
+      - label: Reading Time
+        name: readingTime
+        widget: string
+        default: "7 min"
+      - label: Updated At
+        name: updatedAt
+        widget: datetime
+        date_format: "YYYY-MM-DD"
+        time_format: false
+        format: "YYYY-MM-DD"
+      - label: Draft
+        name: draft
+        widget: boolean
+        default: true
+      - label: Quick Take Points
+        name: points
+        widget: list
+        summary: "{{fields.point}}"
+        field:
+          label: Point
+          name: point
+          widget: string
+      - label: Body
+        name: body
+        widget: markdown

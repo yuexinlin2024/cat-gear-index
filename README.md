@@ -61,6 +61,42 @@ The file name becomes the URL slug. The example above becomes:
 
 Set `draft: true` to keep an article out of the built site.
 
+## Admin CMS
+
+The site includes a Decap CMS admin at:
+
+```text
+https://catgearindex.com/admin/
+```
+
+The CMS edits guide Markdown files in `src/content/guides/` and writes changes back to GitHub. Cloudflare Pages then rebuilds the site.
+
+### Required GitHub OAuth setup
+
+Create a GitHub OAuth App:
+
+```text
+GitHub -> Settings -> Developer settings -> OAuth Apps -> New OAuth App
+```
+
+Use these values:
+
+```text
+Application name: Cat Gear Index CMS
+Homepage URL: https://catgearindex.com
+Authorization callback URL: https://catgearindex.com/api/callback
+```
+
+Then add these Cloudflare Pages environment variables:
+
+```text
+GITHUB_CLIENT_ID=<OAuth app client ID>
+GITHUB_CLIENT_SECRET=<OAuth app client secret>
+NODE_VERSION=22
+```
+
+Redeploy the Pages project after adding the variables.
+
 ## Revenue setup checklist
 
 1. Buy a domain and update `site` in `astro.config.mjs` and `src/utils/seo.ts`.
