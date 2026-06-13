@@ -9,9 +9,14 @@ import { products } from "@/data/products";
 import { toTimestamp } from "@/utils/dates";
 
 const featuredProducts = products.slice(0, 4);
-const guides = (await getCollection("guides", ({ data }) => !data.draft))
-  .sort((a, b) => toTimestamp(b.data.updatedAt) - toTimestamp(a.data.updatedAt))
-  .slice(0, 6);
+const allGuides = (await getCollection("guides", ({ data }) => !data.draft)).sort(
+  (a, b) => toTimestamp(b.data.updatedAt) - toTimestamp(a.data.updatedAt)
+);
+const latestGuides = allGuides.slice(0, 6);
+const beginnerGuides = allGuides
+  .filter((guide) => ["Beginner Care", "Routine Checklists"].includes(guide.data.category))
+  .slice(0, 3);
+const featuredTopics = categories.slice(0, 4);
 ---
 
 <BaseLayout title="Cat Grooming And Home Care Guides" description="Practical cat grooming, bathing, cleaning, and home care routines with simple product notes and non-medical maintenance guidance.">
@@ -19,20 +24,20 @@ const guides = (await getCollection("guides", ({ data }) => !data.draft))
     <div class="hero-copy">
       <span class="eyebrow">Cat grooming and home care</span>
       <h1>Simple grooming, cleaning, and home-care guidance for everyday cat owners.</h1>
-      <p>Cat Gear Index is shifting toward practical care content: bathing routines, brushing tools, litter-area upkeep, odor control, and easy household systems that do not cross into veterinary advice.</p>
+      <p>Cat Gear Index is a practical content site for cat washing, brushing, litter-area upkeep, odor control, and small-home routines. We focus on daily care systems that stay clearly outside veterinary advice.</p>
       <div class="hero-actions">
         <a class="button primary" href="/guides/">Read Guides</a>
-        <a class="button secondary" href="/tools/litter-cost-calculator/">Use A Tool</a>
+        <a class="button secondary" href="/categories/">Browse Care Topics</a>
       </div>
     </div>
-    <div class="hero-panel" aria-label="Database highlights">
+    <div class="hero-panel" aria-label="Site highlights">
       <div>
         <strong>8</strong>
-        <span>care topics to expand</span>
+        <span>care topics</span>
       </div>
       <div>
-        <strong>3</strong>
-        <span>return-visit tools planned</span>
+        <strong>{allGuides.length}</strong>
+        <span>published guides</span>
       </div>
       <div>
         <strong>0</strong>
@@ -43,47 +48,80 @@ const guides = (await getCollection("guides", ({ data }) => !data.draft))
 
   <section class="section">
     <div class="section-heading">
-      <span class="eyebrow">Topics</span>
-      <h2>Keep the site grounded in practical care problems</h2>
-      <p>The existing category structure still works as a topic map for tools, maintenance checklists, and product-supported care routines.</p>
+      <span class="eyebrow">Care Topics</span>
+      <h2>Start from a real daily care problem</h2>
+      <p>The site is organized around recurring home-care problems: brushing, bathing, litter-area upkeep, odor control, cleanup, and practical apartment routines.</p>
     </div>
     <div class="category-grid">
-      {categories.map((category) => (
+      {featuredTopics.map((category) => (
         <CategoryCard category={category} count={products.filter((product) => product.category === category.slug).length} />
       ))}
+    </div>
+    <div class="section-link-row">
+      <a class="button secondary" href="/categories/">View All Care Topics</a>
     </div>
   </section>
 
   <section class="section two-column">
     <div>
       <div class="section-heading align-left">
-        <span class="eyebrow">Product support</span>
-        <h2>Products should support the article, not replace it</h2>
-        <p>For this site model, content leads and products assist. Use product pages as supporting references for combs, wipes, shampoos, mats, fountains, litter tools, and cleaning supplies.</p>
+        <span class="eyebrow">Begin Here</span>
+        <h2>Give new visitors a simple path into the site</h2>
+        <p>New visitors usually need a starting routine, not a full library. These entry guides make the site easier to understand and easier to share.</p>
       </div>
-      <div class="product-grid compact">
-        {featuredProducts.map((product) => <ProductCard product={product} />)}
+      <div class="guide-grid compact-grid">
+        {beginnerGuides.map((guide) => <GuideCard guide={guide} />)}
       </div>
     </div>
     <aside class="operation-panel">
-      <h2>First revenue path</h2>
+      <h2>Editorial focus</h2>
       <ol>
-        <li>Publish 20 to 30 original grooming and home-care guides.</li>
-        <li>Link only a small number of relevant products inside those guides.</li>
-        <li>Apply for AdSense after traffic and indexed pages start to build.</li>
-        <li>Add affiliate links later on high-intent pages such as comb, dryer, mat, and odor-control recommendations.</li>
+        <li>Publish clear answers to narrow care questions.</li>
+        <li>Build topic clusters around brushing, bathing, odor control, and cleanup.</li>
+        <li>Use tools and product notes as supporting pages, not the core brand.</li>
+        <li>Expand the categories that start getting search impressions first.</li>
       </ol>
     </aside>
   </section>
 
   <section class="section">
     <div class="section-heading">
-      <span class="eyebrow">Guides</span>
-      <h2>Content pillars for search traffic</h2>
-      <p>Focus on routines, tools, cleanup, and everyday household care questions people actually search for.</p>
+      <span class="eyebrow">Latest Guides</span>
+      <h2>Fresh articles for search and repeat visits</h2>
+      <p>Keep publishing around routine questions, tools, cleanup, and small-home care. The goal is steady topic coverage, not one giant article.</p>
     </div>
     <div class="guide-grid">
-      {guides.map((guide) => <GuideCard guide={guide} />)}
+      {latestGuides.map((guide) => <GuideCard guide={guide} />)}
+    </div>
+    <div class="section-link-row">
+      <a class="button secondary" href="/guides/">View All Guides</a>
+    </div>
+  </section>
+
+  <section class="section two-column">
+    <div>
+      <div class="section-heading align-left">
+        <span class="eyebrow">Tools</span>
+        <h2>Small utilities keep the site useful</h2>
+        <p>Use simple tools for repeat visits and bookmark value. They support the content strategy without turning the site into a software product.</p>
+      </div>
+      <div class="tool-grid single-tool-grid">
+        <a class="tool-card" href="/tools/litter-cost-calculator/">
+          <span>01</span>
+          <h2>Litter Cost Calculator</h2>
+          <p>Estimate monthly and yearly litter cost by cat count, bag price, bag weight, and usage rate.</p>
+        </a>
+      </div>
+    </div>
+    <div>
+      <div class="section-heading align-left">
+        <span class="eyebrow">Product Notes</span>
+        <h2>Supporting pages for tools and supplies</h2>
+        <p>These pages can later carry product comparisons and affiliate links, but they should stay secondary to the main article library.</p>
+      </div>
+      <div class="product-grid compact">
+        {featuredProducts.map((product) => <ProductCard product={product} />)}
+      </div>
     </div>
   </section>
 </BaseLayout>

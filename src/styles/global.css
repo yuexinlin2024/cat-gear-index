@@ -410,8 +410,16 @@ p {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.guide-grid.compact-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .tool-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.single-tool-grid {
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .tool-card {
@@ -517,6 +525,12 @@ input {
 
 .spec-table div:last-child {
   border-bottom: 0;
+}
+
+.section-link-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .spec-table span {
