@@ -1,7 +1,7 @@
 ---
 title: "Cat Supplies for Small Apartments"
 description: "Choose compact litter, feeding, scratching, and climbing setups without sacrificing daily maintenance."
-category: "Buying Guides"
+category: "Routine Checklists"
 readingTime: "8 min"
 updatedAt: "2026-06-06"
 draft: false

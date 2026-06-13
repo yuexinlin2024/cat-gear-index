@@ -1,7 +1,7 @@
 ---
 title: "How to Clean a Cat Water Fountain"
 description: "A safe maintenance workflow for basins, pumps, filters, and recurring reminders."
-category: "Maintenance"
+category: "Home Cleaning"
 readingTime: "6 min"
 updatedAt: "2026-06-06"
 draft: false

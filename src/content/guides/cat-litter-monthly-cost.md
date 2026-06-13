@@ -1,7 +1,7 @@
 ---
 title: "How to Estimate Monthly Cat Litter Cost"
 description: "Turn bag price, bag weight, cat count, and replacement rhythm into a realistic monthly and yearly estimate."
-category: "Cost Guides"
+category: "Litter Area Care"
 readingTime: "5 min"
 updatedAt: "2026-06-06"
 draft: false

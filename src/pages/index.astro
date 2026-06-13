@@ -11,7 +11,7 @@ import { toTimestamp } from "@/utils/dates";
 const featuredProducts = products.slice(0, 4);
 const guides = (await getCollection("guides", ({ data }) => !data.draft))
   .sort((a, b) => toTimestamp(b.data.updatedAt) - toTimestamp(a.data.updatedAt))
-  .slice(0, 4);
+  .slice(0, 6);
 ---
 
 <BaseLayout title="Cat Grooming And Home Care Guides" description="Practical cat grooming, bathing, cleaning, and home care routines with simple product notes and non-medical maintenance guidance.">

@@ -1,7 +1,7 @@
 ---
 title: "New Cat Owner Supplies Checklist"
 description: "A practical first-week checklist focused on litter, feeding, water, travel, scratching, grooming, and cleanup."
-category: "Starter Guides"
+category: "Beginner Care"
 readingTime: "7 min"
 updatedAt: "2026-06-06"
 draft: false

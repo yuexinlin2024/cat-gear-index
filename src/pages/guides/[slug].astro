@@ -15,6 +15,14 @@ export async function getStaticPaths() {
 const { guide } = Astro.props;
 const { Content } = await render(guide);
 const { title, description, category, readingTime, points, updatedAt } = guide.data;
+const relatedGuides = (await getCollection("guides", ({ data }) => !data.draft))
+  .filter((entry) => entry.slug !== guide.slug)
+  .sort((a, b) => {
+    const aScore = a.data.category === category ? 1 : 0;
+    const bScore = b.data.category === category ? 1 : 0;
+    return bScore - aScore;
+  })
+  .slice(0, 3);
 ---
 
 <BaseLayout title={title} description={description} pathname={`/guides/${guide.slug}/`}>
@@ -30,5 +38,16 @@ const { title, description, category, readingTime, points, updatedAt } = guide.d
 
     <Content />
     <p class="muted">Last updated: {formatDate(updatedAt)}</p>
+
+    {relatedGuides.length > 0 && (
+      <section>
+        <h2>Related Guides</h2>
+        <ul>
+          {relatedGuides.map((entry) => (
+            <li><a href={`/guides/${entry.slug}/`}>{entry.data.title}</a></li>
+          ))}
+        </ul>
+      </section>
+    )}
   </article>
 </BaseLayout>
