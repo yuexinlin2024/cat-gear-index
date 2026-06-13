@@ -46,7 +46,10 @@ export const topics: Topic[] = [
       "how-to-clean-a-litter-area-without-strong-odor",
       "cat-litter-monthly-cost",
       "how-often-should-you-clean-a-cat-water-fountain",
-      "best-litter-mats-for-small-apartments"
+      "best-litter-mats-for-small-apartments",
+      "how-often-should-you-replace-cat-litter-completely",
+      "how-to-reduce-litter-tracking-in-a-small-apartment",
+      "how-to-keep-a-small-apartment-from-smelling-like-cat-litter"
     ]
   },
   {
@@ -60,7 +63,9 @@ export const topics: Topic[] = [
       "small-apartment-cat-setup",
       "cat-grooming-routine-for-small-apartments",
       "new-cat-owner-supplies-checklist",
-      "how-to-store-cat-grooming-tools-in-a-small-home"
+      "how-to-store-cat-grooming-tools-in-a-small-home",
+      "how-often-should-you-wash-cat-blankets-and-bedding",
+      "small-apartment-cleaning-routine-for-cat-owners"
     ]
   }
 ];
