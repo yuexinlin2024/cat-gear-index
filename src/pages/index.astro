@@ -14,38 +14,38 @@ const guides = (await getCollection("guides", ({ data }) => !data.draft))
   .slice(0, 4);
 ---
 
-<BaseLayout title="Cat Supplies Database" description="Compare cat litter, boxes, fountains, feeders, carriers, trees, scratchers, and recurring maintenance costs in one structured database.">
+<BaseLayout title="Cat Grooming And Home Care Guides" description="Practical cat grooming, bathing, cleaning, and home care routines with simple product notes and non-medical maintenance guidance.">
   <section class="hero-section">
     <div class="hero-copy">
-      <span class="eyebrow">Structured cat supplies research</span>
-      <h1>Choose cat gear by fit, maintenance, and real household tradeoffs.</h1>
-      <p>Cat Gear Index is built as a database first: product specs, category filters, maintenance cost, fit notes, and buyer guides for cat owners who want fewer vague recommendations.</p>
+      <span class="eyebrow">Cat grooming and home care</span>
+      <h1>Simple grooming, cleaning, and home-care guidance for everyday cat owners.</h1>
+      <p>Cat Gear Index is shifting toward practical care content: bathing routines, brushing tools, litter-area upkeep, odor control, and easy household systems that do not cross into veterinary advice.</p>
       <div class="hero-actions">
-        <a class="button primary" href="/categories/">Browse Categories</a>
-        <a class="button secondary" href="/tools/litter-cost-calculator/">Estimate Litter Cost</a>
+        <a class="button primary" href="/guides/">Read Guides</a>
+        <a class="button secondary" href="/tools/litter-cost-calculator/">Use A Tool</a>
       </div>
     </div>
     <div class="hero-panel" aria-label="Database highlights">
       <div>
         <strong>8</strong>
-        <span>launch categories</span>
+        <span>care topics to expand</span>
       </div>
       <div>
         <strong>3</strong>
-        <span>tool workflows planned</span>
+        <span>return-visit tools planned</span>
       </div>
       <div>
         <strong>0</strong>
-        <span>veterinary claims</span>
+        <span>medical claims</span>
       </div>
     </div>
   </section>
 
   <section class="section">
     <div class="section-heading">
-      <span class="eyebrow">Database</span>
-      <h2>Start with a category</h2>
-      <p>Each category is designed around comparison fields that matter before purchase and after the box arrives.</p>
+      <span class="eyebrow">Topics</span>
+      <h2>Keep the site grounded in practical care problems</h2>
+      <p>The existing category structure still works as a topic map for tools, maintenance checklists, and product-supported care routines.</p>
     </div>
     <div class="category-grid">
       {categories.map((category) => (
@@ -57,9 +57,9 @@ const guides = (await getCollection("guides", ({ data }) => !data.draft))
   <section class="section two-column">
     <div>
       <div class="section-heading align-left">
-        <span class="eyebrow">Featured records</span>
-        <h2>Product pages are structured for verification</h2>
-        <p>Launch records are intentionally marked as samples. Replace them with real products, source notes, and affiliate URLs before public monetization.</p>
+        <span class="eyebrow">Product support</span>
+        <h2>Products should support the article, not replace it</h2>
+        <p>For this site model, content leads and products assist. Use product pages as supporting references for combs, wipes, shampoos, mats, fountains, litter tools, and cleaning supplies.</p>
       </div>
       <div class="product-grid compact">
         {featuredProducts.map((product) => <ProductCard product={product} />)}
@@ -68,10 +68,10 @@ const guides = (await getCollection("guides", ({ data }) => !data.draft))
     <aside class="operation-panel">
       <h2>First revenue path</h2>
       <ol>
-        <li>Publish verified category data and buyer guides.</li>
-        <li>Add Amazon, Chewy, Walmart, or Petco affiliate links with clear disclosure.</li>
-        <li>Apply for AdSense after the site has real content, policy pages, and natural search visibility.</li>
-        <li>Use Search Console data to expand high-impression categories.</li>
+        <li>Publish 20 to 30 original grooming and home-care guides.</li>
+        <li>Link only a small number of relevant products inside those guides.</li>
+        <li>Apply for AdSense after traffic and indexed pages start to build.</li>
+        <li>Add affiliate links later on high-intent pages such as comb, dryer, mat, and odor-control recommendations.</li>
       </ol>
     </aside>
   </section>
@@ -80,6 +80,7 @@ const guides = (await getCollection("guides", ({ data }) => !data.draft))
     <div class="section-heading">
       <span class="eyebrow">Guides</span>
       <h2>Content pillars for search traffic</h2>
+      <p>Focus on routines, tools, cleanup, and everyday household care questions people actually search for.</p>
     </div>
     <div class="guide-grid">
       {guides.map((guide) => <GuideCard guide={guide} />)}

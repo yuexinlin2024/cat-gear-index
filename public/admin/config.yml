@@ -39,12 +39,14 @@ collections:
         name: category
         widget: select
         options:
-          - Starter Guides
-          - Buying Guides
-          - Cost Guides
-          - Maintenance
-          - Comparisons
-          - Troubleshooting
+          - Bathing And Drying
+          - Brushing And Shedding
+          - Litter Area Care
+          - Odor Control
+          - Home Cleaning
+          - Routine Checklists
+          - Product Picks
+          - Beginner Care
       - label: Reading Time
         name: readingTime
         widget: string

@@ -1,6 +1,6 @@
 export const site = {
   name: "Cat Gear Index",
-  description: "A structured cat supplies database for comparing litter, litter boxes, fountains, feeders, carriers, trees, scratchers, and maintenance costs.",
+  description: "Practical cat grooming, washing, and home care guides with routines, product notes, and non-medical maintenance advice.",
   url: "https://catgearindex.com",
   author: "Cat Gear Index Editorial Desk"
 };
