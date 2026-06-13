@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { getCollection, render } from "astro:content";
+import { formatDate } from "@/utils/dates";
 
 export async function getStaticPaths() {
   const guides = await getCollection("guides", ({ data }) => !data.draft);
@@ -28,6 +29,6 @@ const { title, description, category, readingTime, points, updatedAt } = guide.d
     </section>
 
     <Content />
-    <p class="muted">Last updated: {updatedAt}</p>
+    <p class="muted">Last updated: {formatDate(updatedAt)}</p>
   </article>
 </BaseLayout>

@@ -7,7 +7,7 @@ const guides = defineCollection({
     description: z.string(),
     category: z.string(),
     readingTime: z.string(),
-    updatedAt: z.string(),
+    updatedAt: z.union([z.string(), z.date()]),
     draft: z.boolean().default(false),
     points: z.array(z.string())
   })

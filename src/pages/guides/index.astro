@@ -2,9 +2,10 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import GuideCard from "@/components/GuideCard.astro";
 import { getCollection } from "astro:content";
+import { toTimestamp } from "@/utils/dates";
 
 const guides = (await getCollection("guides", ({ data }) => !data.draft)).sort(
-  (a, b) => Date.parse(b.data.updatedAt) - Date.parse(a.data.updatedAt)
+  (a, b) => toTimestamp(b.data.updatedAt) - toTimestamp(a.data.updatedAt)
 );
 ---
 
