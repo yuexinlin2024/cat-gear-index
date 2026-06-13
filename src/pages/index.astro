@@ -5,6 +5,7 @@ import GuideCard from "@/components/GuideCard.astro";
 import ProductCard from "@/components/ProductCard.astro";
 import { getCollection } from "astro:content";
 import { categories } from "@/data/categories";
+import { topics } from "@/data/topics";
 import { products } from "@/data/products";
 import { toTimestamp } from "@/utils/dates";
 
@@ -17,6 +18,7 @@ const beginnerGuides = allGuides
   .filter((guide) => ["Beginner Care", "Routine Checklists"].includes(guide.data.category))
   .slice(0, 3);
 const featuredTopics = categories.slice(0, 4);
+const featuredTopicPages = topics;
 ---
 
 <BaseLayout title="Cat Grooming And Home Care Guides" description="Practical cat grooming, bathing, cleaning, and home care routines with simple product notes and non-medical maintenance guidance.">
@@ -26,7 +28,7 @@ const featuredTopics = categories.slice(0, 4);
       <h1>Simple grooming, cleaning, and home-care guidance for everyday cat owners.</h1>
       <p>Cat Gear Index is a practical content site for cat washing, brushing, litter-area upkeep, odor control, and small-home routines. We focus on daily care systems that stay clearly outside veterinary advice.</p>
       <div class="hero-actions">
-        <a class="button primary" href="/guides/">Read Guides</a>
+        <a class="button primary" href="/start-here/">Start Here</a>
         <a class="button secondary" href="/categories/">Browse Care Topics</a>
       </div>
     </div>
@@ -43,6 +45,23 @@ const featuredTopics = categories.slice(0, 4);
         <strong>0</strong>
         <span>medical claims</span>
       </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-heading">
+      <span class="eyebrow">Topic Hubs</span>
+      <h2>Browse the site by recurring care theme</h2>
+      <p>These topic hubs group related guides together so readers can move through the site by problem, not by archive date.</p>
+    </div>
+    <div class="topic-grid">
+      {featuredTopicPages.map((topic) => (
+        <a class="topic-card" href={`/topics/${topic.slug}/`}>
+          <span class="eyebrow">{topic.categories.slice(0, 2).join(" / ")}</span>
+          <h3>{topic.name}</h3>
+          <p>{topic.description}</p>
+        </a>
+      ))}
     </div>
   </section>
 
@@ -71,6 +90,9 @@ const featuredTopics = categories.slice(0, 4);
       </div>
       <div class="guide-grid compact-grid">
         {beginnerGuides.map((guide) => <GuideCard guide={guide} />)}
+      </div>
+      <div class="section-link-row align-left-row">
+        <a class="button secondary" href="/start-here/">Open Start Here</a>
       </div>
     </div>
     <aside class="operation-panel">

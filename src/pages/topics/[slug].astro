@@ -1,0 +1,58 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import GuideCard from "@/components/GuideCard.astro";
+import { getCollection } from "astro:content";
+import { topics, getTopic } from "@/data/topics";
+import { toTimestamp } from "@/utils/dates";
+
+export async function getStaticPaths() {
+  return topics.map((topic) => ({
+    params: { slug: topic.slug }
+  }));
+}
+
+const { slug } = Astro.params;
+const topic = getTopic(slug!);
+
+if (!topic) {
+  throw new Error(`Unknown topic: ${slug}`);
+}
+
+const guides = (await getCollection("guides", ({ data }) => !data.draft))
+  .filter((guide) => topic.categories.includes(guide.data.category))
+  .sort((a, b) => toTimestamp(b.data.updatedAt) - toTimestamp(a.data.updatedAt));
+
+const startHereGuides = topic.startHere
+  .map((targetSlug) => guides.find((guide) => guide.slug === targetSlug))
+  .filter(Boolean);
+---
+
+<BaseLayout title={topic.name} description={topic.description} pathname={`/topics/${topic.slug}/`}>
+  <section class="page-hero">
+    <span class="eyebrow">Topic</span>
+    <h1>{topic.name}</h1>
+    <p>{topic.intro}</p>
+  </section>
+
+  <section class="section">
+    <div class="section-heading align-left">
+      <span class="eyebrow">Start Here</span>
+      <h2>Core pages for this topic</h2>
+      <p>These are the best first pages if someone lands in this topic and wants a quick orientation.</p>
+    </div>
+    <div class="guide-grid">
+      {startHereGuides.map((guide) => <GuideCard guide={guide!} />)}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-heading align-left">
+      <span class="eyebrow">All Guides</span>
+      <h2>Everything currently published in this topic</h2>
+      <p>As the site grows, this page becomes the easiest place to browse connected content instead of isolated articles.</p>
+    </div>
+    <div class="guide-grid">
+      {guides.map((guide) => <GuideCard guide={guide} />)}
+    </div>
+  </section>
+</BaseLayout>

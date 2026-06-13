@@ -1,0 +1,63 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import GuideCard from "@/components/GuideCard.astro";
+import { getCollection } from "astro:content";
+import { toTimestamp } from "@/utils/dates";
+
+const guides = (await getCollection("guides", ({ data }) => !data.draft)).sort(
+  (a, b) => toTimestamp(b.data.updatedAt) - toTimestamp(a.data.updatedAt)
+);
+
+const beginnerGuides = guides
+  .filter((guide) => ["Beginner Care", "Routine Checklists"].includes(guide.data.category))
+  .slice(0, 4);
+
+const cleanupGuides = guides
+  .filter((guide) => ["Home Cleaning", "Odor Control", "Litter Area Care"].includes(guide.data.category))
+  .slice(0, 4);
+
+const groomingGuides = guides
+  .filter((guide) => ["Brushing And Shedding", "Bathing And Drying", "Product Picks"].includes(guide.data.category))
+  .slice(0, 4);
+---
+
+<BaseLayout title="Start Here" description="A simple starting page for new visitors who want cat grooming, cleanup, and home-care guidance without digging through the full archive.">
+  <section class="page-hero">
+    <span class="eyebrow">Start Here</span>
+    <h1>A simple entry point for new readers.</h1>
+    <p>If this is your first visit, start with the most practical routines first: setup, cleanup, brushing, and household fit. This page is meant to remove guesswork.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-heading align-left">
+      <span class="eyebrow">First Steps</span>
+      <h2>Start with the basics that shape daily life</h2>
+      <p>These guides help new cat owners and new readers get the fastest orientation.</p>
+    </div>
+    <div class="guide-grid">
+      {beginnerGuides.map((guide) => <GuideCard guide={guide} />)}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-heading align-left">
+      <span class="eyebrow">Cleanup</span>
+      <h2>Build a manageable home-care routine</h2>
+      <p>Once the basics are covered, cleanup and odor control usually create the biggest day-to-day friction.</p>
+    </div>
+    <div class="guide-grid">
+      {cleanupGuides.map((guide) => <GuideCard guide={guide} />)}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-heading align-left">
+      <span class="eyebrow">Grooming</span>
+      <h2>Add grooming only as much as you can repeat</h2>
+      <p>The right grooming setup is the one you will actually use every week, not the one with the most tools.</p>
+    </div>
+    <div class="guide-grid">
+      {groomingGuides.map((guide) => <GuideCard guide={guide} />)}
+    </div>
+  </section>
+</BaseLayout>

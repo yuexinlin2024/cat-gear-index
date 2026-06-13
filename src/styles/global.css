@@ -271,7 +271,8 @@ p {
 
 .category-card,
 .guide-card,
-.product-card {
+.product-card,
+.topic-card {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--panel);
@@ -288,6 +289,7 @@ p {
 .category-card:hover,
 .guide-card:hover,
 .product-card:hover,
+.topic-card:hover,
 .tool-card:hover {
   border-color: #b7cbc2;
   transform: translateY(-1px);
@@ -319,6 +321,19 @@ p {
 
 .product-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.topic-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.topic-card {
+  display: grid;
+  gap: 10px;
+  min-height: 210px;
+  padding: 18px;
 }
 
 .product-grid.compact {
@@ -533,6 +548,10 @@ input {
   margin-top: 20px;
 }
 
+.section-link-row.align-left-row {
+  justify-content: flex-start;
+}
+
 .spec-table span {
   color: var(--muted);
   font-weight: 750;
@@ -610,6 +629,7 @@ input {
   }
 
   .category-grid,
+  .topic-grid,
   .product-grid,
   .product-grid.compact,
   .guide-grid,
@@ -639,6 +659,7 @@ input {
   }
 
   .category-grid,
+  .topic-grid,
   .product-grid,
   .product-grid.compact,
   .guide-grid,
