@@ -18,7 +18,8 @@ export const topics: Topic[] = [
     startHere: [
       "how-often-should-you-brush-a-cat",
       "best-cat-brushes-for-short-hair",
-      "how-to-reduce-cat-hair-on-sofa-and-bedding"
+      "how-to-reduce-cat-hair-on-sofa-and-bedding",
+      "how-to-brush-a-cat-that-hates-brushing"
     ]
   },
   {
@@ -30,7 +31,8 @@ export const topics: Topic[] = [
     categories: ["Bathing And Drying", "Routine Checklists", "Product Picks"],
     startHere: [
       "how-to-bathe-a-cat-at-home",
-      "cat-grooming-routine-for-small-apartments"
+      "how-to-dry-a-cat-after-a-bath",
+      "best-towels-for-cat-bath-time"
     ]
   },
   {
@@ -43,7 +45,8 @@ export const topics: Topic[] = [
     startHere: [
       "how-to-clean-a-litter-area-without-strong-odor",
       "cat-litter-monthly-cost",
-      "cat-water-fountain-cleaning"
+      "how-often-should-you-clean-a-cat-water-fountain",
+      "best-litter-mats-for-small-apartments"
     ]
   },
   {
@@ -56,7 +59,8 @@ export const topics: Topic[] = [
     startHere: [
       "small-apartment-cat-setup",
       "cat-grooming-routine-for-small-apartments",
-      "new-cat-owner-supplies-checklist"
+      "new-cat-owner-supplies-checklist",
+      "how-to-store-cat-grooming-tools-in-a-small-home"
     ]
   }
 ];
